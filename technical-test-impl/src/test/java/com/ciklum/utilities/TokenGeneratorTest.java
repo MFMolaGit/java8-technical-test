@@ -1,6 +1,7 @@
 package com.ciklum.utilities;
 
 import com.ciklum.dtos.User;
+import com.ciklum.dtos.UserToken;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,8 +29,9 @@ public class TokenGeneratorTest {
          podamFactory = new PodamFactoryImpl();
     }
 
-    @Test
-    public void testGenerateToken() {
+    //The UserToken instance will always be returned with a random delay between 0 and 5000 milliseconds.
+    @Test(timeout=5000)
+    public void testGenerateToken() throws InterruptedException {
         //Given
         final User user = podamFactory.manufacturePojo(User.class);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
@@ -37,9 +39,10 @@ public class TokenGeneratorTest {
         String expectedToken = new StringBuilder(user.getUserId()).append("_").append(formatDateTime).toString();
 
         //When
-        final String generatedToken = tokenGenerator.generate(user);
+        final UserToken generatedUserToken = tokenGenerator.generate(user);
 
         //Then
-        Assert.assertThat(generatedToken, is(expectedToken));
+        Assert.assertNotNull(generatedUserToken);
+        Assert.assertThat(generatedUserToken.getToken(), is(expectedToken));
     }
 }

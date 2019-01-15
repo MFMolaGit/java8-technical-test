@@ -21,15 +21,12 @@ public class SyncTokenServiceImpl implements ISyncTokenService {
     }
 
     @Override
-    public User authenticate(Credentials credentials) throws AuthenticationException {
-        if(!credentialsValidator.validate(credentials)) {
-            throw new AuthenticationException();
-        }
-        return new User.UserBuilder(credentials.getUsername()).build();
+    public User authenticate(Credentials credentials) throws AuthenticationException, InterruptedException {
+        return credentialsValidator.validate(credentials);
     }
 
     @Override
-    public UserToken requestToken(User user) {
-        return new UserToken.UserTokenBuilder(tokenGenerator.generate(user)).build();
+    public UserToken requestToken(User user) throws InterruptedException {
+        return tokenGenerator.generate(user);
     }
 }

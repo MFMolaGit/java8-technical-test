@@ -43,26 +43,27 @@ public class SyncTokenServiceImplTest {
     }
 
     @Test
-    public void testAuthenticateValidCredentials() throws AuthenticationException {
+    public void testAuthenticateValidCredentials() throws AuthenticationException, InterruptedException {
 
         //Given
-        final Credentials credentials = podamFactory.manufacturePojoWithFullData(Credentials.class);
+        final Credentials credentials = podamFactory.manufacturePojo(Credentials.class);
+        final User expectedUser = podamFactory.manufacturePojo(User.class);
 
         //When
-        when(credentialsValidator.validate(any(Credentials.class))).thenReturn(true);
+        when(credentialsValidator.validate(any(Credentials.class))).thenReturn(expectedUser);
 
         final User user = syncTokenService.authenticate(credentials);
 
         //Then
-        Assert.assertThat("User not expected", credentials.getUsername(), is(user.getUserId()));
+        Assert.assertThat("User not expected", expectedUser, is(user));
     }
 
     @Test(expected = AuthenticationException.class)
-    public void testAuthenticateNotValidCredentials() throws AuthenticationException {
+    public void testAuthenticateNotValidCredentials() throws AuthenticationException, InterruptedException {
         //Given
         final Credentials credentials = podamFactory.manufacturePojo(Credentials.class);
 
-        when(credentialsValidator.validate(any(Credentials.class))).thenReturn(false);
+        when(credentialsValidator.validate(any(Credentials.class))).thenThrow(AuthenticationException.class);
 
         //When
         final UserToken userToken = syncTokenService.issueToken(credentials);
@@ -73,11 +74,11 @@ public class SyncTokenServiceImplTest {
     }
 
     @Test
-    public void testRequestToken() {
+    public void testRequestToken() throws InterruptedException {
 
         //Given
         final User user = podamFactory.manufacturePojo(User.class);
-        String expectedUserToken = "generatedToken";
+        final UserToken expectedUserToken = podamFactory.manufacturePojo(UserToken.class);
 
         //When
         when(tokenGenerator.generate(any(User.class))).thenReturn(expectedUserToken);
@@ -85,7 +86,7 @@ public class SyncTokenServiceImplTest {
         final UserToken userToken = syncTokenService.requestToken(user);
 
         //Then
-        Assert.assertThat("User not expected", userToken.getToken(), is(expectedUserToken));
+        Assert.assertThat("User not expected", userToken, is(expectedUserToken));
     }
 
 }

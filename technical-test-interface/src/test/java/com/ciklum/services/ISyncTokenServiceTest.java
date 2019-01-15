@@ -37,7 +37,7 @@ public class ISyncTokenServiceTest {
 
 
     @Test
-    public void testIssueTokenValidCredentials() throws AuthenticationException {
+    public void testIssueTokenValidCredentials() throws AuthenticationException, InterruptedException {
         //Given
         final User user = podamFactory.manufacturePojo(User.class);
         final Credentials credentials = podamFactory.manufacturePojo(Credentials.class);
@@ -57,7 +57,7 @@ public class ISyncTokenServiceTest {
     }
 
     @Test(expected = AuthenticationException.class)
-    public void testIssueTokenNotValidCredentials() throws AuthenticationException {
+    public void testIssueTokenNotValidCredentials() throws AuthenticationException, InterruptedException {
         //Given
         final User user = podamFactory.manufacturePojo(User.class);
         final Credentials credentials = podamFactory.manufacturePojo(Credentials.class);
