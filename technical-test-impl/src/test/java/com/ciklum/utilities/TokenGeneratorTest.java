@@ -32,12 +32,12 @@ public class TokenGeneratorTest {
     public void testGenerateToken() {
         //Given
         final User user = podamFactory.manufacturePojo(User.class);
-        final String generatedToken = tokenGenerator.generate(user);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
         String formatDateTime = formatter.format(new Date());
+        String expectedToken = new StringBuilder(user.getUserId()).append("_").append(formatDateTime).toString();
 
         //When
-        String expectedToken = new StringBuilder(user.getUserId()).append("_").append(formatDateTime).toString();
+        final String generatedToken = tokenGenerator.generate(user);
 
         //Then
         Assert.assertThat(generatedToken, is(expectedToken));
