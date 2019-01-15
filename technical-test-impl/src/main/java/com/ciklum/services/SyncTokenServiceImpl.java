@@ -7,6 +7,8 @@ import com.ciklum.utilities.TokenGenerator;
 import com.ciklum.validators.CredentialsValidator;
 import org.springframework.stereotype.Service;
 
+import javax.naming.AuthenticationException;
+
 @Service
 public class SyncTokenServiceImpl implements ISyncTokenService {
 
@@ -19,12 +21,15 @@ public class SyncTokenServiceImpl implements ISyncTokenService {
     }
 
     @Override
-    public User authenticate(Credentials credentials) {
-        return null;
+    public User authenticate(Credentials credentials) throws AuthenticationException {
+        if(!credentialsValidator.validate(credentials)) {
+            throw new AuthenticationException();
+        }
+        return new User.UserBuilder(credentials.getUsername()).build();
     }
 
     @Override
     public UserToken requestToken(User user) {
-        return null;
+        return new UserToken.UserTokenBuilder(tokenGenerator.generate(user)).build();
     }
 }
