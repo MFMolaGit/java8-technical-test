@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CredentialsValidator {
     public boolean validate(Credentials credentials) {
-        return false;
+        final String upperUser = credentials.getUsername().toUpperCase();
+        final String upperPass = credentials.getPassword();
+        return upperUser.equals(upperPass);
     }
 }

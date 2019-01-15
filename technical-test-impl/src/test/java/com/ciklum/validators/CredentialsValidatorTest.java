@@ -22,7 +22,7 @@ public class CredentialsValidatorTest {
         final boolean validation = credentialsValidator.validate(credentials);
 
         //Then
-        Assert.assertTrue(validation);
+        Assert.assertTrue("Valid credentials expected", validation);
     }
 
     // username: house , password: House => Invalid credentials.
@@ -35,7 +35,7 @@ public class CredentialsValidatorTest {
         final boolean validation = credentialsValidator.validate(credentials);
 
         //Then
-        Assert.assertFalse(validation);
+        Assert.assertFalse("Not valid credentials expected", validation);
     }
 
 }
