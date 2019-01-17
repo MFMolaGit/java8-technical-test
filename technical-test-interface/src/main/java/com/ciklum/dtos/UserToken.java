@@ -1,7 +1,13 @@
 package com.ciklum.dtos;
 
-public class UserToken {
+import java.io.Serializable;
+
+public class UserToken implements Serializable {
     private String token;
+
+    //Neccesary to serialization
+    public UserToken() {
+    }
 
     private UserToken(String token) {
         this.token = token;

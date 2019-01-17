@@ -10,7 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>technical-test-interface</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <name>technical-test-interface</name>
     <description>Java 8 Technical test interface for Addison Global</description>
+    <packaging>jar</packaging>
+    <url>http://maven.apache.org</url>
 
 </project>

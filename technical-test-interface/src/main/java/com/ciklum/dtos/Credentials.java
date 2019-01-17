@@ -1,9 +1,15 @@
 package com.ciklum.dtos;
 
-public class Credentials {
+import java.io.Serializable;
+
+public class Credentials implements Serializable {
 
     private String username;
     private String password;
+
+    //Neccesary to serialization
+    public Credentials() {
+    }
 
     private Credentials(String username, String password) {
         this.username = username;

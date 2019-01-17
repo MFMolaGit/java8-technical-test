@@ -9,22 +9,31 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>technical-test-impl</artifactId>
+    <artifactId>technical-test-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>technical-test-impl</name>
-    <description>Java 8 Technical test implementation for Addison Global</description>
+    <name>technical-test-web</name>
+    <description>Java 8 Technical test web for Addison Global</description>
     <packaging>jar</packaging>
     <url>http://maven.apache.org</url>
 
     <dependencies>
-
-        <!-- app dependencies -->
         <dependency>
             <groupId>com.ciklum</groupId>
-            <artifactId>technical-test-interface</artifactId>
+            <artifactId>technical-test-impl</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+<!--                <configuration>
+                    <mainClass>com.ciklum.configuration.WebApplication</mainClass>
+                </configuration>-->
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
