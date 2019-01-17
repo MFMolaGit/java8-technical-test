@@ -12,7 +12,7 @@
 
 	<groupId>com.ciklum</groupId>
 	<artifactId>java8-technical-test</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>java8-technical-test</name>
 	<description>Java 8 Technical test for Addison Global</description>
     <packaging>pom</packaging>
