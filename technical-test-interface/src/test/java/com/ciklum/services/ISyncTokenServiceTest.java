@@ -5,12 +5,9 @@ import com.ciklum.dtos.User;
 import com.ciklum.dtos.UserToken;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -18,7 +15,6 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 import javax.naming.AuthenticationException;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -27,17 +23,17 @@ public class ISyncTokenServiceTest {
 
     @Mock
     private ISyncTokenService iSyncTokenService;
+
     private PodamFactory podamFactory;
 
     @Before
     public void setup() {
-        iSyncTokenService = mock(ISyncTokenService.class);
         podamFactory = new PodamFactoryImpl();
     }
 
 
     @Test
-    public void testIssueTokenValidCredentials() throws AuthenticationException, InterruptedException {
+    public void testIssueTokenValidCredentials() throws Throwable {
         //Given
         final User user = podamFactory.manufacturePojo(User.class);
         final Credentials credentials = podamFactory.manufacturePojo(Credentials.class);
@@ -57,7 +53,7 @@ public class ISyncTokenServiceTest {
     }
 
     @Test(expected = AuthenticationException.class)
-    public void testIssueTokenNotValidCredentials() throws AuthenticationException, InterruptedException {
+    public void testIssueTokenNotValidCredentials() throws Throwable {
         //Given
         final User user = podamFactory.manufacturePojo(User.class);
         final Credentials credentials = podamFactory.manufacturePojo(Credentials.class);

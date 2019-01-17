@@ -3,6 +3,7 @@ package com.ciklum.services;
 import com.ciklum.dtos.Credentials;
 import com.ciklum.dtos.User;
 import com.ciklum.dtos.UserToken;
+import com.ciklum.exceptions.TokenGenerationException;
 import com.ciklum.utilities.TokenGenerator;
 import com.ciklum.validators.CredentialsValidator;
 import org.junit.Assert;
@@ -16,8 +17,6 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 import javax.naming.AuthenticationException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
@@ -59,7 +58,7 @@ public class SyncTokenServiceImplTest {
     }
 
     @Test(expected = AuthenticationException.class)
-    public void testAuthenticateNotValidCredentials() throws AuthenticationException, InterruptedException {
+    public void testAuthenticateNotValidCredentials() throws Throwable {
         //Given
         final Credentials credentials = podamFactory.manufacturePojo(Credentials.class);
 
@@ -74,7 +73,7 @@ public class SyncTokenServiceImplTest {
     }
 
     @Test
-    public void testRequestToken() throws InterruptedException {
+    public void testRequestToken() throws InterruptedException, TokenGenerationException {
 
         //Given
         final User user = podamFactory.manufacturePojo(User.class);

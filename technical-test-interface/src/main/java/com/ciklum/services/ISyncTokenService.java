@@ -1,16 +1,16 @@
 package com.ciklum.services;
 
-import com.ciklum.dtos.*;
-
-import javax.naming.AuthenticationException;
+import com.ciklum.dtos.Credentials;
+import com.ciklum.dtos.User;
+import com.ciklum.dtos.UserToken;
 
 public interface ISyncTokenService {
 
-    User authenticate(Credentials credentials) throws AuthenticationException, InterruptedException;
+    User authenticate(Credentials credentials) throws Throwable;
 
-    UserToken requestToken(User user) throws InterruptedException;
+    UserToken requestToken(User user) throws Throwable;
 
-    default UserToken issueToken(Credentials credentials) throws AuthenticationException, InterruptedException {
+    default UserToken issueToken(Credentials credentials) throws Throwable {
         final User authenticatedUser = authenticate(credentials);
         return requestToken(authenticatedUser);
     }

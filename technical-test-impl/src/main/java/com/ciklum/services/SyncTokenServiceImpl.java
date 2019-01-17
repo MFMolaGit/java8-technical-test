@@ -3,6 +3,7 @@ package com.ciklum.services;
 import com.ciklum.dtos.Credentials;
 import com.ciklum.dtos.User;
 import com.ciklum.dtos.UserToken;
+import com.ciklum.exceptions.TokenGenerationException;
 import com.ciklum.utilities.TokenGenerator;
 import com.ciklum.validators.CredentialsValidator;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class SyncTokenServiceImpl implements ISyncTokenService {
     }
 
     @Override
-    public UserToken requestToken(User user) throws InterruptedException {
+    public UserToken requestToken(User user) throws InterruptedException, TokenGenerationException {
         return tokenGenerator.generate(user);
     }
 }
